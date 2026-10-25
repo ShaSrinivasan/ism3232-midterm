@@ -1,5 +1,8 @@
 #businessrules.py
 #Business rules for Cooper Kettle Coffee Roasters
+#Organization: Cooper Kettle Coffee Roasters
+#Name: Sharath Srinivasan
+
 def calculate_bean_cost(bag_price: float, bags: int) -> float:
     """   Returns the bean cost before any discount (rule 1). """
     
