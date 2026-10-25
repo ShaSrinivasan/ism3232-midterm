@@ -32,10 +32,27 @@ def calculate_shipment_total(bag_price: float, bags: int, partner: bool = False)
 
     return shipment_total
 
-def requires_prepayment(shipment_total: float) -> bool:
+def requires_prepayment(total: float) -> bool:
     """   Determine if prepayment is required based on the total shipment cost.  """
     
-    if shipment_total < 1500:
+    if total < 1500:
         return True
     else:
         return False
+
+def needs_pallet(bags: int, total: float) -> bool:
+    """   Determine if a pallet is needed based on the number of bags and the total shipment cost.  """
+
+    if bags >= 60 or total >= 700:
+        return True
+    else:
+        return False
+
+def total_shipped(shipments: list) -> float:
+    """   Calculate the total amount shipped based on a list of shipment totals.  """
+    sum = 0
+    for shipment in shipments:
+        if shipment < 0:
+            raise ValueError("Shipment totals cannot be negative.")
+        sum += shipment
+    return sum
