@@ -20,3 +20,22 @@ def get_bulk_discount(bags: int, partner: bool = False) -> float:
 
     return discount
 
+def calculate_shipment_total(bag_price: float, bags: int, partner: bool = False) -> float:
+    """   Calculate the total shipment cost after applying bulk discounts.  """
+
+    total_cost = calculate_bean_cost(bag_price, bags)
+    discount = get_bulk_discount(bags, partner)
+    shipment_total = total_cost * (1 - discount)
+
+    if shipment_total < 250:
+        shipment_total += 35.00 # Add $35 shipping fee for orders under $250
+
+    return shipment_total
+
+def requires_prepayment(shipment_total: float) -> bool:
+    """   Determine if prepayment is required based on the total shipment cost.  """
+    
+    if shipment_total < 1500:
+        return True
+    else:
+        return False
