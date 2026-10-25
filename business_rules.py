@@ -1,13 +1,13 @@
 #businessrules.py
 #Business rules for Cooper Kettle Coffee Roasters
 def calculate_bean_cost(bag_price: float, bags: int) -> float:
-    """   Calculate the total cost of coffee beans based on the price per bag and the number of bags purchased.  """
+    """   Returns the bean cost before any discount (rule 1). """
 
     total_cost = bag_price * bags
     return total_cost
 
 def get_bulk_discount(bags: int, partner: bool = False) -> float:
-    """   Calculate the bulk discount based on the number of bags purchased and whether the customer is a partner.  """
+    """   Returns the discount rate as a decimal, so 9% is 0.09 (rules 2 and 3).   """
 
     discount = 0.00
     if bags >=80:
@@ -21,7 +21,7 @@ def get_bulk_discount(bags: int, partner: bool = False) -> float:
     return discount
 
 def calculate_shipment_total(bag_price: float, bags: int, partner: bool = False) -> float:
-    """   Calculate the total shipment cost after applying bulk discounts.  """
+    """   Returns the shipment total for one shipment: the discounted cost, plus the shipping fee when it applies (rule 4). It must call your first two functions. """
 
     total_cost = calculate_bean_cost(bag_price, bags)
     discount = get_bulk_discount(bags, partner)
@@ -41,18 +41,30 @@ def requires_prepayment(total: float) -> bool:
         return False
 
 def needs_pallet(bags: int, total: float) -> bool:
-    """   Determine if a pallet is needed based on the number of bags and the total shipment cost.  """
-
+    """   	Returns True when the shipment needs a freight pallet (rule 6), otherwise False.  """
     if bags >= 60 or total >= 700:
         return True
     else:
         return False
 
 def total_shipped(shipments: list) -> float:
-    """   Calculate the total amount shipped based on a list of shipment totals.  """
-    sum = 0
+    """   Returns the sum of the shipment totals for every shipment in the list. It must use a for loop that calls calculate_shipment_total.  """
+    sum = 0.0
     for shipment in shipments:
-        if shipment < 0:
-            raise ValueError("Shipment totals cannot be negative.")
-        sum += shipment
+        bag_price, bags, partner = shipment
+        sum += calculate_shipment_total(bag_price, bags, partner)
     return sum
+
+def largest_shipment(shipments: list) -> str:
+    """Returns the buyer of the shipment with the largest shipment total. If two are tied for largest, it returns the one that comes first in the list. An empty list returns an empty string, "". It must use a for loop that calls calculate_shipment_total."""
+    largest_total = 0.0
+    largest_buyer = ""
+    for shipment in shipments:
+        bag_price, bags, partner, buyer = shipment
+        shipment_total = calculate_shipment_total(bag_price, bags, partner)
+
+        if shipment_total > largest_total:
+            largest_total = shipment_total
+            largest_buyer = buyer
+
+    return largest_buyer
