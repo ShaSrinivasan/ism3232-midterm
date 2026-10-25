@@ -32,8 +32,8 @@ for shipment in shipments:
     print(format_shipment_line(buyer, shipment_total, prepayment_required, pallet_needed))
 
 print ('Shipments:', len(shipments))
-print ('Total shipped:', total_shipped([(s["bag_price"], s["bags"], s["partner"]) for s in shipments]))
-print('Average shipment total:', total_shipped([(s["bag_price"], s["bags"], s["partner"]) for s in shipments]) / len(shipments))
+print ('Total shipped: ${:.2f}'.format(total_shipped([(s["bag_price"], s["bags"], s["partner"]) for s in shipments])))
+print('Average shipment total: ${:.2f}'.format(round(total_shipped([(s["bag_price"], s["bags"], s["partner"]) for s in shipments]) / len(shipments), 2)))
 print ('Largest shipment:', largest_shipment([(s["buyer"], s["bag_price"], s["bags"], s["partner"]) for s in shipments]))
 print('Prepayments required:', sum(1 for s in shipments if requires_prepayment(calculate_shipment_total(s["bag_price"], s["bags"], s["partner"]))))
 print('Pallets needed:', sum(1 for s in shipments if needs_pallet(s["bags"], calculate_shipment_total(s["bag_price"], s["bags"], s["partner"]))))

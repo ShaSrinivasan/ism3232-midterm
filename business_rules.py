@@ -38,14 +38,14 @@ def calculate_shipment_total(bag_price: float, bags: int, partner: bool = False)
 def requires_prepayment(total: float) -> bool:
     """   Determine if prepayment is required based on the total shipment cost.  """
     
-    if total < 1500:
+    if total >= 1500.0:
         return True
     else:
         return False
 
 def needs_pallet(bags: int, total: float) -> bool:
     """   	Returns True when the shipment needs a freight pallet (rule 6), otherwise False.  """
-    if bags >= 60 or total >= 700:
+    if bags >= 60 and total >= 700.0:
         return True
     else:
         return False
@@ -56,7 +56,7 @@ def total_shipped(shipments: list) -> float:
     for shipment in shipments:
         bag_price, bags, partner = shipment
         sum += calculate_shipment_total(bag_price, bags, partner)
-    return sum
+    return round(sum, 2)  # Round to two decimal places
 
 def largest_shipment(shipments: list) -> str:
     """Returns the buyer of the shipment with the largest shipment total. If two are tied for largest, it returns the one that comes first in the list. An empty list returns an empty string, "". It must use a for loop that calls calculate_shipment_total."""
