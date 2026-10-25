@@ -2,8 +2,8 @@
 #Business rules for Cooper Kettle Coffee Roasters
 def calculate_bean_cost(bag_price: float, bags: int) -> float:
     """   Returns the bean cost before any discount (rule 1). """
-
-    total_cost = bag_price * bags
+    
+    total_cost =  bags * bag_price
     return total_cost
 
 def get_bulk_discount(bags: int, partner: bool = False) -> float:
@@ -60,7 +60,7 @@ def largest_shipment(shipments: list) -> str:
     largest_total = 0.0
     largest_buyer = ""
     for shipment in shipments:
-        bag_price, bags, partner, buyer = shipment
+        buyer, bag_price, bags, partner = shipment
         shipment_total = calculate_shipment_total(bag_price, bags, partner)
 
         if shipment_total > largest_total:
