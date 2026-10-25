@@ -68,3 +68,9 @@ def largest_shipment(shipments: list) -> str:
             largest_buyer = buyer
 
     return largest_buyer
+
+def format_shipment_line(buyer: str, total: float, prepayment: bool, pallet: bool) -> str:
+    """ Returns one line of the report, such as Uptown Bakery: $175.00 | prepayment: no | pallet: no. Each True/False value is shown as yes or no, and the amount always has two decimal places. """
+    prepayment_str = "yes" if prepayment else "no"
+    pallet_str = "yes" if pallet else "no"
+    return f"{buyer}: ${total:.2f} | prepayment: {prepayment_str} | pallet: {pallet_str}"
