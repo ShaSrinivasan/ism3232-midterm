@@ -18,13 +18,13 @@ def test_get_bulk_discount():
 
 def test_calculate_shipment_total():
     assert calculate_shipment_total(83,3) == 284  # 249 + 35 shipping
-    assert calculate_shipment_total(10.0,25) == 250.0  # 250 and no shipping
+    assert calculate_shipment_total(25.0,10) == 250.0  # 250 and no shipping
     assert calculate_shipment_total(12.5, 3) == 72.5  # 37.5 + 35 shipping
-    assert calculate_shipment_total(15.0, 20) == 270.0  # 300 - 9% discount
+    assert calculate_shipment_total(15.0, 20) == 273.0  # 300 - 9% discount
     assert calculate_shipment_total(15.0, 80) == 1032.0  # 1200 - 14% discount
-    assert calculate_shipment_total(12.4,20) == 261.2  # 248 - 9% discount + 35 shipping
-    assert calculate_shipment_total(12.4, 20, partner=True) == 250.8  # 248 - (248 * (0.09 + 0.04)) with no shipping fee
-    assert calculate_shipment_total(15.0, 25, partner=True) == 321.75  # (375 - (375 * (0.09 + 0.04))) + shipping
+    assert calculate_shipment_total(12.4,20) == 260.68 # 248 - 9% discount + 35 shipping
+    assert calculate_shipment_total(12.4, 20, partner=True) == 250.76 # 248 - (248 * (0.09 + 0.04)) with no shipping fee
+    assert calculate_shipment_total(15.0, 25, partner=True) == 326.25  # (375 - (375 * (0.09 + 0.04))) + shipping
 
 def test_requires_prepayment():
     assert requires_prepayment(1499.99) == False
@@ -39,14 +39,14 @@ def test_needs_pallet():
 
 def test_total_shipped():
     shipments = [(10.0, 5, False), (12.5, 3, False), (15.0, 20, False)]
-    assert total_shipped(shipments) == 427.5
+    assert total_shipped(shipments) == 430.5
 
 def test_largest_shipment():
     shipments = [("Buyer A", 15.0,20, False), ("Buyer B", 12.5, 3, False), ("Buyer C", 15.0, 20, False)]
     assert largest_shipment(shipments) == "Buyer A"
 
 def test_format_shipment_line(): 
-    assert format_shipment_line("Buyer A", 100.0, True, False) == "Buyer A: $100.00 (Prepayment required)"
-    assert format_shipment_line("Buyer B", 200.0, False, True) == "Buyer B: $200.00 (Pallet needed)"
-    assert format_shipment_line("Buyer C", 300.0, True, True) == "Buyer C: $300.00 (Prepayment required, Pallet needed)"
-    assert format_shipment_line("Buyer D", 400.0, False, False) == "Buyer D: $400.00"
+    assert format_shipment_line("Buyer A", 100.0, True, False) == "Buyer A: $100.00 | prepayment: yes | pallet: no"
+    assert format_shipment_line("Buyer B", 200.0, False, True) == "Buyer B: $200.00 | prepayment: no | pallet: yes"
+    assert format_shipment_line("Buyer C", 300.0, True, True) == "Buyer C: $300.00 | prepayment: yes | pallet: yes"
+    assert format_shipment_line("Buyer D", 400.0, False, False) == "Buyer D: $400.00 | prepayment: no | pallet: no"

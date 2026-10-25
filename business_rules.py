@@ -21,7 +21,7 @@ def get_bulk_discount(bags: int, partner: bool = False) -> float:
     if partner and bags >= 20:
         discount += 0.04 # Additional 4% discount for partners when ordering 20 or more bags
 
-    return discount
+    return round(discount, 2)
 
 def calculate_shipment_total(bag_price: float, bags: int, partner: bool = False) -> float:
     """   Returns the shipment total for one shipment: the discounted cost, plus the shipping fee when it applies (rule 4). It must call your first two functions. """
