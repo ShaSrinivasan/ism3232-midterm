@@ -175,7 +175,7 @@ After the directory name (ism3232-midterm), the .venv shows that the virtual env
 4 directories, 8 files
 ```
 The gitignore folder is not on the computer but it is in the repository. It is hidden
-
+```
 
 ## 4. Every function and test
 ```
@@ -221,7 +221,6 @@ tests/test_business_rules.py
 
 ```
 Business rules defines 8 functions, and tests/test_business_rules defines 26 tests
-```
 
 ## 5. Which files print
 ```
