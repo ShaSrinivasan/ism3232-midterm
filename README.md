@@ -39,7 +39,7 @@ I wrote 26 tests to test edge cases and make sure the outputs match
 2. business_rules.py - rules for main.py to follow based on the 6 business rules. Functions for each element of the project created
 3. commands.md - All the commands used in the making of the project.
 4. main.py - The data being tested and printing of summary stats based on business rules
-5. requirements.txt - libraries required for this project, being pytest and ruff
+5. requirements.txt - libraries required for this project, including pytest and ruff
 6. tests - Folder containing all the tests we are running
 7. test_business_rules.py - all 26 tests for pytest
 8. .gitignore - file telling git to ignore venv and pycache
