@@ -193,16 +193,34 @@ business_rules.py
 
 tests/test_business_rules.py
 7:def test_calculate_bean_cost():
-12:def test_get_bulk_discount():
-19:def test_calculate_shipment_total():
-29:def test_requires_prepayment():
-34:def test_needs_pallet():
-40:def test_total_shipped():
-44:def test_largest_shipment():
-48:def test_format_shipment_line():
+12:def test_get_bulk_discount_zero_discount():
+14:def test_get_bulk_discount_nine_percent_discount():
+16:def test_get_bulk_discount_fourteen_percent_discount():
+18:def test_get_bulk_discount_partner_discount():
+21:def test_get_bulk_discount_partner_no_discount():
+24:def test_calculate_shipment_total_with_shipping_fee():
+26:def test_calculate_shipment_total_without_shipping_fee():
+28:def test_calculate_shipment_total_with_discount():
+31:def test_calculate_shipment_total_with_discount_and_partner():
+33:def test_calculate_shipment_total_with_discount_and_not_partner_matters():
+35:def test_calculate_shipment_total_with_discount_and_shipping_fee_partner_matters():
+40:def test_requires_prepayment_almost_threshold():
+42:def test_requires_prepayment_at_threshold():
+44:def test_requires_prepayment_above_threshold():
+48:def test_needs_pallet():
+50:def test_needs_pallet_bags_yes_total_no():
+52:def test_needs_pallet_bags_no_total_yes():
+54:def test_needs_pallet_bags_yes_total_yes():
+57:def test_total_shipped():
+61:def test_largest_shipment():
+64:def test_largest_shipment_tie():
+68:def test_format_shipment_line_prepayment_yes_pallet_no():
+70:def test_format_shipment_line_prepayment_no_pallet_yes():
+72:def test_format_shipment_line_prepayment_yes_pallet_yes():
+74:def test_format_shipment_line_prepayment_no_pallet_no():
 
 ```
-Business rules defines 8 functions, and tests/test_business_rules defines 8 tests
+Business rules defines 8 functions, and tests/test_business_rules defines 26 tests
 
 
 ## 5. Which files print
