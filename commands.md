@@ -221,7 +221,7 @@ tests/test_business_rules.py
 
 ```
 Business rules defines 8 functions, and tests/test_business_rules defines 26 tests
-
+```
 
 ## 5. Which files print
 ```
